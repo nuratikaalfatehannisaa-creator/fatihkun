@@ -11,7 +11,11 @@ app = Flask(__name__)
 
 
 app.config['SECRET_KEY'] = 'kunci_rahasia_super_aman_123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///absensi.db'
+# Gunakan SQLite yang relatif terhadap direktori aplikasi
+# (lebih aman untuk deploy platform yang berbeda)
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'absensi.db')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
