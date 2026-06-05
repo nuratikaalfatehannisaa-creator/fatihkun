@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="admin-dashboard"> 
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Dashboard Admin</h2>
+    <a href="{{ url_for('kelola_mahasiswa') }}" class="btn btn-dark">Kelola Data Mahasiswa (CRUD)</a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-info text-white shadow border-0">
+            <div class="card-body p-4">
+                <h6>Total Mahasiswa Terdaftar</h6>
+                <h2 class="fw-bold">{{ total_mahasiswa }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow border-0">
+    <div class="card-body">
+        <h5 class="fw-bold mb-3">Rekapitulasi Absensi Seluruh Mahasiswa</h5>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Jam</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in semua_absensi %}
+                    <tr>
+                        <td>{{ row.mahasiswa.nim }}</td>
+                        <td>{{ row.mahasiswa.nama_lengkap }}</td>
+                        <td>{{ row.tanggal }}</td>
+                        <td>{{ row.waktu.strftime('%H:%M') }}</td>
+                        <td><span class="badge bg-secondary">{{ row.status }}</span></td>
+                        <td>{{ row.keterangan or '-' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="text-center">Belum ada data absensi masuk.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

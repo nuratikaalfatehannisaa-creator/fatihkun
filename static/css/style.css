@@ -1,0 +1,359 @@
+/* Custom Style untuk Sistem Absensi Mahasiswa */
+
+/* Reset & Base Styling */
+:root{
+    --bg-solid: #070a14;
+    --text: #e9eef7;
+    --muted: rgba(233,238,247,.72);
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.12);
+    --accent1: #22d3ee;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-solid) !important;
+    color: #ffffff;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* paksa semua teks menjadi putih supaya konsisten */
+*{
+    color: #ffffff !important;
+}
+
+/* Override khusus untuk halaman admin/kelola mahasiswa supaya tidak kalah oleh class Bootstrap seperti text-dark */
+.admin-dashboard *,
+.admin-page *{
+    color: #ffffff !important;
+}
+
+.admin-dashboard .text-dark,
+.admin-page .text-dark,
+.admin-dashboard .text-primary,
+.admin-page .text-primary,
+.admin-dashboard code,
+.admin-page code{
+    color: #ffffff !important;
+}
+
+
+/* Pastikan badge/pill dan tombol yang memakai class warna Bootstrap tetap terbaca putih */
+.text-dark,
+.text-muted,
+.text-secondary,
+.text-primary,
+.btn-outline-secondary {
+    color: #ffffff !important;
+}
+
+/* kecilkan chance class text-*-light mengubah warna */
+.table-light td,
+.table-light th,
+.table-light {
+    color: #ffffff !important;
+}
+
+
+
+body.theme-light{
+    --bg-solid: #f6f8ff;
+    --text: #0b1220;
+    --muted: rgba(11,18,32,.68);
+    --panel: rgba(0,0,0,0.03);
+    --panel-border: rgba(0,0,0,0.10);
+}
+
+/* Background (elegant, lebih netral—tidak dominan biru) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(1200px circle at 15% 10%, rgba(124, 58, 237, 0.18), transparent 50%),
+        radial-gradient(900px circle at 85% 20%, rgba(34, 211, 238, 0.12), transparent 55%),
+        radial-gradient(1000px circle at 50% 85%, rgba(16, 185, 129, 0.10), transparent 55%),
+        linear-gradient(180deg, #070b14 0%, #0b1220 35%, #070b14 100%);
+}
+
+/* Sirkuit abstrak + animasi cahaya mengalir (lebih halus & premium) */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.9;
+
+    background:
+        /* glow nodes (lebih ungu/emerald, biru diturunkan intensitasnya) */
+        radial-gradient(closest-side at 18% 22%, rgba(124,58,237,0.30), transparent 55%),
+        radial-gradient(closest-side at 78% 35%, rgba(34,211,238,0.18), transparent 58%),
+        radial-gradient(closest-side at 48% 72%, rgba(16,185,129,0.22), transparent 60%),
+
+        /* sirkuit abstrak */
+        repeating-linear-gradient(115deg,
+            transparent 0 14px,
+            rgba(124,58,237,0.10) 14px 15px,
+            transparent 15px 28px),
+
+        repeating-linear-gradient(25deg,
+            transparent 0 16px,
+            rgba(34,211,238,0.08) 16px 17px,
+            transparent 17px 32px),
+
+        /* garis tipis depth */
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+
+    background-size:
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        220% 220%,
+        240% 240%,
+        60px 60px,
+        60px 60px;
+
+    background-position:
+        0 0,
+        0 0,
+        0 0,
+        0% 0%,
+        0% 0%,
+        center,
+        center;
+
+    animation: bbai-flow 9.5s ease-in-out infinite;
+}
+
+@keyframes bbai-flow {
+    0% {
+        filter: saturate(1) hue-rotate(0deg);
+        transform: translateY(-4px);
+        background-position:
+            0 0,
+            0 0,
+            0 0,
+            -8% 0%,
+            8% 0%,
+            center,
+            center;
+    }
+    50% {
+        filter: saturate(1.08) hue-rotate(8deg);
+        transform: translateY(4px);
+        background-position:
+            0 0,
+            0 0,
+            0 0,
+            6% 0%,
+            -6% 0%,
+            center,
+            center;
+    }
+    100% {
+        filter: saturate(1) hue-rotate(0deg);
+        transform: translateY(-4px);
+        background-position:
+            0 0,
+            0 0,
+            0 0,
+            -8% 0%,
+            8% 0%,
+            center,
+            center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::after { animation: none !important; }
+}
+
+
+/* Agar konten tetap terasa modern & readable */
+.container { position: relative; padding-top: 0.25rem; }
+
+/* Glassmorphism untuk area utama */
+.container::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    right: -24px;
+    top: -10px;
+    bottom: -10px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: -1;
+}
+
+/* Kustomisasi Navbar */
+.navbar {
+    border-bottom: 3px solid #70028f;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30) !important;
+    background: linear-gradient(90deg, rgba(13,110,253,0.70), rgba(34,211,238,0.25)) !important;
+}
+
+/* Desain Kartu */
+.card {
+    border-radius: 12px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 34px rgba(34, 211, 238, 0.18) !important;
+}
+
+/* Pembungkus Tabel */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0,0,0,0.28);
+}
+
+.table thead { background-color: rgba(0,0,0,0.22) !important; font-weight: 700; }
+
+/* Pastikan teks tabel admin (rekapitulasi) benar-benar putih */
+.table.table-striped,
+.table.table-striped *,
+.table-striped,
+.table-striped * {
+    color: #ffffff !important;
+}
+
+.table { color: var(--text); }
+
+body .table,
+body .table th,
+body .table td {
+    color: #ffffff !important;
+    text-shadow:
+        0 2px 0 rgba(0,0,0,0.55),
+        0 0 12px rgba(34,211,238,0.18),
+        0 0 6px rgba(124,58,237,0.14);
+}
+
+/* Pastikan wrapper dashboard/admin yang memakai tabel juga tetap putih */
+.card table,
+.card table th,
+.card table td {
+    color: #ffffff !important;
+}
+
+
+/* Buat th lebih tegas */
+.table thead th,
+.table th {
+    color: #ffffff !important;
+    font-weight: 900;
+}
+
+/* Kontrol background sel agar tidak "ketimpa" efek background */
+.table td, .table th {
+    background: rgba(0,0,0,0.10) !important;
+}
+
+
+.table td, .table th {
+    border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+
+/* Badge status */
+.badge {
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background-color: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Form Login & Registrasi */
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid rgba(249, 245, 245, 0.929);
+    background: rgba(0,0,0,0.18) !important;
+    color: var(--text) !important;
+}
+
+.form-control::placeholder { color: rgba(233, 238, 247, 0.65); }
+.form-control:focus, .form-select:focus {
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 0.25rem rgba(34, 211, 238, 0.15);
+}
+
+.btn { border-radius: 8px; padding: 8px 16px; font-weight: 600; }
+
+/* Portrait Handphone (lebih rapi & tidak terlalu padat) */
+@media (max-width: 575.98px) {
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        letter-spacing: 0;
+    }
+
+    /* kurangi efek glass yang terlalu melebar */
+    .container::before {
+        left: -10px;
+        right: -10px;
+        top: -8px;
+        bottom: -8px;
+        border-radius: 14px;
+    }
+
+    /* kartu lebih nyaman di layar kecil */
+    .card {
+        border-radius: 14px !important;
+    }
+
+    /* tabel: biar tidak ketimpa / lebih nyaman dibaca */
+    .table td,
+    .table th {
+        padding: 0.55rem 0.5rem !important;
+        font-size: 0.92rem;
+    }
+
+    /* tombol group di kolom aksi */
+    .btn-group,
+    .btn-group .btn {
+        width: 100%;
+    }
+
+    /* rapikan rekap admin */
+    .table-responsive {
+        background: rgba(0,0,0,0.35);
+    }
+}
+
+
+.alert {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
